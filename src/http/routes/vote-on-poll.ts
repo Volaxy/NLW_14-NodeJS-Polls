@@ -2,6 +2,7 @@ import { z } from "zod";
 import prisma from "../../libs/prisma";
 import { FastifyInstance } from "fastify";
 import { randomUUID } from "crypto";
+import { redis } from "../../libs/redis";
 
 export async function voteOnPoll(app: FastifyInstance) {
     app.post("/polls/:pollId/votes", async (request, response) => {
@@ -38,6 +39,8 @@ export async function voteOnPoll(app: FastifyInstance) {
                         }
                     }
                 });
+
+                await redis.zincrby(pollId, -1, userPreviusVoteOnPoll.pollOptionId);
             } else {
                 return response.status(400).send({
                     message: "You already vote on this poll"
@@ -64,6 +67,10 @@ export async function voteOnPoll(app: FastifyInstance) {
                 pollOptionId,
             }
         });
+
+        // Faz um ranqueamento de dados de acordo com a tabela que quero fazer o ranqueamento, o peso do ranqueamento, e o item do ranqueamento que quero incrementar
+        // Incrementa em "1", o ranking da opção "pollOptionId" na enquete "pollId"
+        await redis.zincrby(pollId, 1, pollOptionId);
 
         return response.status(201).send();
     });
