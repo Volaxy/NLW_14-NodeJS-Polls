@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "bfa2626d-2487-45b2-a7eb-eebab7293b59",
+		"name": "#NLW14 - Node.Js - Polls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30056941"
+	},
+	"item": [
+		{
+			"name": "Polls",
+			"item": [
+				{
+					"name": "Create Poll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Best language?\",\n    \"options\": [\n        \"HTML\",\n        \"CSS\",\n        \"JavaSCript\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{POLLS_ROUTE}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{POLLS_ROUTE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Poll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Best language?\",\n    \"options\": [\n        \"HTML\",\n        \"CSS\",\n        \"JavaSCript\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{POLLS_ROUTE}}/7a44c25f-25fc-4121-89f1-8cc463c41d2d",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{POLLS_ROUTE}}",
+								"7a44c25f-25fc-4121-89f1-8cc463c41d2d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vote on Poll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pollOptionId\": \"871cae5d-6f89-46b8-ad95-3921d48e1773\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{POLLS_ROUTE}}/7a44c25f-25fc-4121-89f1-8cc463c41d2d/votes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{POLLS_ROUTE}}",
+								"7a44c25f-25fc-4121-89f1-8cc463c41d2d",
+								"votes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3333",
+			"type": "string"
+		},
+		{
+			"key": "POLLS_ROUTE",
+			"value": "polls",
+			"type": "string"
+		}
+	]
+}
